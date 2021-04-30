@@ -4,6 +4,7 @@
   --white: #ffffff;
   --bgc-secondary: #2f303a;
   --bgc-third: #f5f4fa;
+  --transition-duration-tfunction: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 html {
@@ -47,11 +48,6 @@ body {
   letter-spacing: 0.02em;
 }
 
-/* дает ссылкам цвет body */
-.top .link {
-  color: inherit;
-}
-
 /* убирает маркеры со списков */
 .list {
   margin-top: 0;
@@ -92,19 +88,7 @@ p {
   color: var(--accent);
 }
 
-/* подсвечивает текущую страницу */
-.link.current {
-  color: var(--accent);
-}
-
-/* ховер и фокус на ссылках */
-.site-nav .link:hover,
-.site-nav .link:focus {
-  color: var(--accent);
-}
-
 /* Шапка */
-
 .page-header .container {
   display: flex;
   align-items: center;
@@ -127,6 +111,32 @@ p {
   margin-right: 93px;
   padding-top: 25px;
   padding-bottom: 25px;
+}
+
+.link.current {
+  position: relative;
+  color: var(--accent);
+}
+
+.link.current::after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.site-nav a {
+  transition: var(--transition-duration-tfunction);
+}
+
+.site-nav .link:hover,
+.site-nav .link:focus {
+  color: var(--accent);
 }
 
 .site-nav-item,
@@ -162,11 +172,21 @@ p {
 
 .header-contacts-svg > use {
   fill: #757575;
+  transition: fill var(--transition-duration-tfunction);
+}
+
+.top .link {
+  color: inherit;
+  transition: color var(--transition-duration-tfunction);
 }
 
 .contacts-item .link {
   display: flex;
   align-items: center;
+}
+
+.list.bottom .link {
+  transition: color var(--transition-duration-tfunction);
 }
 
 .contacts .link:hover,
@@ -240,6 +260,7 @@ p {
   line-height: 1.9;
   letter-spacing: 0.06em;
   cursor: pointer;
+  transition: color var(--transition-duration-tfunction), background-color var(--transition-duration-tfunction);
 }
 
 .btn.primary:hover,
@@ -262,6 +283,8 @@ p {
   letter-spacing: 0.03em;
   cursor: pointer;
   border: transparent;
+  transition: color var(--transition-duration-tfunction), background-color var(--transition-duration-tfunction),
+    box-shadow var(--transition-duration-tfunction);
 }
 
 .btn.secondary:hover,
@@ -270,8 +293,6 @@ p {
   background-color: var(--accent);
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08), 0px 2px 2px rgba(0, 0, 0, 0.12);
 }
-
-/* Особенности */
 
 .section.our-features {
   padding-bottom: 0px;
@@ -337,6 +358,27 @@ p {
   text-align: center;
 }
 
+.what-we-do {
+  position: relative;
+}
+
+.what-we-do h3 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  background: rgba(47, 48, 58, 0.8);
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
 .section.our-team {
   background-color: var(--bgc-third);
 }
@@ -347,7 +389,7 @@ p {
 }
 
 .site-nav a,
-.list.features .title,
+.features .title,
 .name,
 .section-job,
 .section-team,
@@ -367,8 +409,6 @@ p {
   font-weight: normal;
   margin-bottom: 16px;
 }
-
-/* Сетки */
 
 .card-set {
   display: flex;
@@ -398,7 +438,6 @@ img {
   background-color: var(--white);
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 0px 0px 4px 4px;
-  /* overflow: hidden; */
 }
 
 .social-icons {
@@ -413,6 +452,7 @@ img {
   height: 44px;
   border-radius: 50%;
   background-color: var(--white);
+  transition: background-color var(--transition-duration-tfunction), fill var(--transition-duration-tfunction);
 }
 
 .social-icons-item:not(:last-child) {
@@ -432,6 +472,7 @@ img {
   width: 20px;
   height: 20px;
   fill: #afb1b8;
+  transition: fill var(--transition-duration-tfunction);
 }
 
 .card .name {
@@ -466,6 +507,7 @@ img {
   border: 1px solid #afb1b8;
   box-sizing: border-box;
   border-radius: 4px;
+  transition: border var(--transition-duration-tfunction);
 }
 
 .our-clients-svg {
@@ -475,12 +517,14 @@ img {
   width: 106px;
   height: 60px;
   fill: #afb1b8;
+  transition: fill var(--transition-duration-tfunction);
 }
 
 .our-clients-logo {
   width: 106px;
   height: 60px;
   fill: #afb1b8;
+  transition: fill var(--transition-duration-tfunction);
 }
 
 .our-clients-item:not(:last-child) {
@@ -578,16 +622,14 @@ footer h3 {
   text-transform: uppercase;
   color: var(--white);
 }
-footer .social-icons-item {
-  /* background: rgba(255, 255, 255, 0.1); */
+
+footer .social-icons-svg {
+  fill: var(--white);
 }
 
 footer .social-icons-link {
   background-color: rgba(255, 255, 255, 0.1);
-}
-
-footer .social-icons-svg {
-  fill: var(--white);
+  transition: background-color var(--transition-duration-tfunction);
 }
 
 footer .social-icons-link:hover,
@@ -635,4 +677,84 @@ footer .social-icons-link:focus {
 
 .card-product {
   flex-grow: 1;
+}
+
+.thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+.cover {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(33, 150, 243, 0.9);
+  transition: transform var(--transition-duration-tfunction);
+}
+
+.item-product:hover .cover {
+  transform: translateY(-100%);
+}
+
+.cover p {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.6;
+  letter-spacing: 0.03em;
+  color: var(--white);
+  padding: 63px 24px;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(50%, 50%) scale(10);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: 250ms;
+  width: 528px;
+  height: 581px;
+  background-color: var(--white);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.button-modal {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  background: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.close {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
 }

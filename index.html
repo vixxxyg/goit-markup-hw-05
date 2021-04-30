@@ -45,7 +45,7 @@
             <section class="section hero overlay">
                 <div class="container">
                 <h1 class="hero-title">Эффективные решения для вашего бизнеса</h1>
-                <button type="button" class="btn primary">Заказать услугу</button>
+                <button type="button" class="btn primary" data-modal-open>Заказать услугу</button>
                 </div>
             </section>
             
@@ -91,9 +91,26 @@
                 <div class="container">
                 <h2 class="section-job">Чем мы занимаемся</h2>
                 <ul class="list card-set">
-                    <li class="item"><img src="./images/box1.jpg" alt="Человек печатает на клавиатуре" width="370"></li>
-                    <li class="item"><img src="./images/box2.jpg" alt="Человек держит в руках смартфон" width="370"></li>
-                    <li class="item"><img src="./images/box3.jpg" alt="Человек работает за планшетом" width="370"></li>
+                    <li class="item">
+                        <div class="what-we-do">
+                        <img src="./images/box1.jpg" alt="Человек печатает на клавиатуре" width="370">
+                        <h3>Десктопные приложения</h3>
+                        </div>
+                    </li>
+                    
+                    <li class="item">
+                        <div class="what-we-do">
+                        <img src="./images/box2.jpg" alt="Человек держит в руках смартфон" width="370">
+                        <h3>Мобильные приложения</h3>
+                        </div>
+                    </li>
+                    
+                    <li class="item">
+                        <div class="what-we-do">
+                        <img src="./images/box3.jpg" alt="Человек работает за планшетом" width="370">
+                        <h3>Дизайнерские решения</h3>
+                        </div>
+                    </li>
                 </ul>
             </div>
             </section>
@@ -373,6 +390,15 @@
             </div>
             </footer>
     
-        
+            <div class="backdrop is-hidden" data-modal>
+                <div class="modal">
+                    <button class="button-modal" data-modal-close>
+                        <svg class="close">
+                            <use href="./images/icons/sprite2.svg#icon-x"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+<script src="./js/modal.js"></script>
 </body>
 </html>
